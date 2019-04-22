@@ -1,0 +1,32 @@
+//
+//  {{ prefix }}{{ module_info.name }}{{ module_info.file_name }}
+//  {{ module_info.project_name }}
+//
+//  Created by {{ developer.name }} on {{ date }}.
+//  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
+//
+
+import UIKit
+
+class {{ module_info.name }}Assembly {
+
+    var view : {{ module_info.name }}ViewControllerProtocol!
+    var presenter : {{ module_info.name }}PresenterProtocol!
+    var interactor : {{ module_info.name }}InteractorProtocol!
+    var router : {{ module_info.name }}RouterProtocol!
+    
+    func configure(with navigationController: AppNavigationControllerProtocol) -> {{ module_info.name }}ViewControllerProtocol {
+        router.navigationController = navigationController
+        
+        presenter.view = view
+        presenter.router = router
+        presenter.interactor = interactor
+
+        interactor.output = presenter
+
+        view.output = presenter
+        
+        return view
+    }
+
+}
